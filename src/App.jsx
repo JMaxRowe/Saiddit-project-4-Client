@@ -17,7 +17,6 @@ function App() {
   return (
     <>
       <Navbar/>
-      <LeftSideBar/>
       <Routes>
         <Route index element={<Home/>}></Route>
         <Route path='/sign-up' element={<SignUpPage />}></Route>

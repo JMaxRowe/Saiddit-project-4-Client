@@ -28,7 +28,7 @@ export default function SignUpForm(){
         e.preventDefault()
         try {
             const {data} = await signUp(formData)
-            setToken(data.token)
+            setToken(data.access)
             setUser(getUser())
             navigate("/")
         } catch (error) {
@@ -67,7 +67,7 @@ export default function SignUpForm(){
             {errors.passwordConfirmation && <p className='errorMessage'>{errors.passwordConfirmation}</p>}
 
             <button type="submit" disabled={isUploading}>{isUploading ? 'uploading...' : 'Sign-up'}</button>
-            <Link to={"/user/sign-in"}>Already have an account?</Link>
+            <Link to={"/sign-in/"}>Already have an account?</Link>
         </form>
     )
 }

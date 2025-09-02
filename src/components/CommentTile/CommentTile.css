@@ -1,0 +1,11 @@
+.commentCard{
+    background-color: rgb(16, 16, 16);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+}
+
+.userInfo{
+    font-size: 0.75em;
+}

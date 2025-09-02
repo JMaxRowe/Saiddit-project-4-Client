@@ -4,6 +4,7 @@ import { getPost, deletePost } from '../../utils/posts';
 import { Link, useParams, useNavigate } from "react-router";
 import { UserContext } from '../../contexts/UserContext';
 import { topLevelComments } from '../../utils/comments';
+import CommentTile from '../CommentTile/CommentTile';
 
 export default function PostPage(){
     const { postId } = useParams()
@@ -52,9 +53,21 @@ export default function PostPage(){
     return(
         <main className='postPage'>
             <div className="postSection">
-                <h1>{post.title}</h1>
+                <div className="postInfo">
+                    <p>{post.community.name}</p>
+                <p>{post.poster.username}</p>
+                </div>
+
+                <div className="postBody">
+                    <h2>{post.title}</h2>
+                    <p>{post.body}</p>
+                </div>
+                <div className="postInteractions">
+                    <p>{post.score}</p>
+                </div>
             </div>
             <div className="commentsSection">
+                <h4>Comments:</h4>
                     {isLoading 
                     ? 'Loading...'
                     :
@@ -62,8 +75,7 @@ export default function PostPage(){
                         comments.map((comment) => {
                             return (
                             <div key={comment.id} className="commentTile">
-                                commenter: {comment.commenter.username} <br />
-                                {comment.body}
+                                <CommentTile comment={comment} />
                             </div>
                             );
                         })

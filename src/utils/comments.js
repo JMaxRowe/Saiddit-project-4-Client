@@ -20,17 +20,25 @@ export const getComment = (id) => {
 }
 
 export const createComment = (payload) => {
-    return axios.post(BASE_URL, payload)
+    return axios.post(BASE_URL, payload, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+    })
 }
 
 export const updateComment = (id, payload) => {
-    return axios.put(BASE_URL + `${id}/`, payload)
+    return axios.put(BASE_URL + `${id}/`, payload, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+    })
 }
 
 export const deleteComment = (id) => {
-    return axios.delete(BASE_URL + `${id}/`)
+    return axios.delete(BASE_URL + `${id}/`, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+    })
 }
 
 export const restoreComment = (id) => {
-    return axios.post(BASE_URL + `${id}/restore/`)
+    return axios.post(BASE_URL + `${id}/restore/`, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+    })
 }

@@ -1,0 +1,10 @@
+div.postCard{
+    width: 100%;
+    background-color: rgb(26, 26, 26);
+    padding: 10px;
+    border-radius: 12px;
+}
+
+div.postCard:hover{
+    background-color: rgb(16, 16, 16);
+}

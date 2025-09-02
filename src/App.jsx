@@ -15,14 +15,15 @@ import SignInPage from './components/SignInPage/SignInPage'
 function App() {
 
   return (
-    <>
+    <main className='appContainer'>
       <Navbar/>
       <Routes>
         <Route index element={<Home/>}></Route>
         <Route path='/sign-up' element={<SignUpPage />}></Route>
         <Route path='/sign-in' element={<SignInPage />}></Route>
+        <Route path='/posts/:postId/' element={<PostPage />}></Route>
       </Routes>
-    </>
+    </main>
   )
 }
 

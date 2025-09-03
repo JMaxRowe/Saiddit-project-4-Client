@@ -1,5 +1,6 @@
 import "./CommentTile.css"
 import { Link } from "react-router";
+import VoteController from "../VoteController/VoteController";
 
 export default function CommentTile ({comment}){
 
@@ -10,7 +11,12 @@ export default function CommentTile ({comment}){
                     <p className="commentMessage">{comment.body}</p>
                 </div>
                 <div className="commentInteractions">
-                    <span>{comment.score}</span>
+                    <VoteController
+                    contentTypeId={comment.contentTypeId}
+                    objectId={comment.id}
+                    score={comment.score}
+                    userVote={comment.user_vote ?? 0}
+                    />
                 </div>
             </div>
     )

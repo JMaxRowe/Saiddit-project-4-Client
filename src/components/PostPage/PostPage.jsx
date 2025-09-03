@@ -5,6 +5,7 @@ import { Link, useParams, useNavigate } from "react-router";
 import { UserContext } from '../../contexts/UserContext';
 import { topLevelComments } from '../../utils/comments';
 import CommentTile from '../CommentTile/CommentTile';
+import VoteController from '../VoteController/VoteController';
 
 export default function PostPage(){
     const { postId } = useParams()
@@ -63,7 +64,12 @@ export default function PostPage(){
                     <p>{post.body}</p>
                 </div>
                 <div className="postInteractions">
-                    <p>{post.score}</p>
+                    <VoteController 
+                    contentTypeId={post.contentTypeId}
+                    objectId={post.id}
+                    score={post.score}
+                    userVote={post.user_vote ?? 0}
+                    />
                 </div>
             </div>
             <div className="commentsSection">

@@ -4,11 +4,15 @@ import { getToken } from "../utils/auth";
 const BASE_URL = import.meta.env.VITE_API_URL + "/posts/";
 
 export const postsIndex = () => {
-    return axios.get(BASE_URL)
+    return axios.get(BASE_URL, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+    })
 }
 
 export const getPost = (id) => {
-    return axios.get(BASE_URL + `${id}/`);
+    return axios.get(BASE_URL + `${id}/`, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+    });
 };
 
 export const createPost = (formData) => {

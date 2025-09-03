@@ -4,19 +4,30 @@ import { getToken } from "../utils/auth";
 const BASE_URL = import.meta.env.VITE_API_URL + "/comments/";
 
 export const commentsIndex = (postId) => {
-    return axios.get(BASE_URL, { params: { post: postId } })
+    return axios.get(BASE_URL, { 
+        params: { post: postId } , 
+        headers: { Authorization: `Bearer ${getToken()}` ,}
+})
 }
 
 export const topLevelComments = (postId) => {
-    return axios.get(BASE_URL, { params: { post: postId, parent: 'null' } })
+    return axios.get(BASE_URL, { 
+        params: { post: postId, parent: 'null' },
+        headers: { Authorization: `Bearer ${getToken()}` },
+    })
 }
 
 export const commentReplies = (postId, parentCommentId) => {
-    return axios.get(BASE_URL, { params: { post: postId, parent: parentCommentId } })
+    return axios.get(BASE_URL, { 
+        params: { post: postId, parent: parentCommentId },
+        headers: { Authorization: `Bearer ${getToken()}` },
+    })
 }
 
 export const getComment = (id) => {
-    return axios.get(BASE_URL + `${id}/`)
+    return axios.get(BASE_URL + `${id}/`, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+    })
 }
 
 export const createComment = (payload) => {

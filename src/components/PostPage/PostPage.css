@@ -1,5 +1,5 @@
 .postPage{
-    width: 700px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -23,4 +23,35 @@
 
 .postMedia{
     margin: 0 auto;
+}
+
+.postHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ownerOptions{
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+}
+
+.editPostButton{
+    font-size: 20px;
+    color: rgb(214, 149, 18);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.archivePostButton{
+    font-size: 20px;
+    color: rgb(214, 18, 18);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
 }

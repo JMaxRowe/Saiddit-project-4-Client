@@ -50,7 +50,7 @@ export default function VoteController({
         }
         
     }
-    console.log(myVote)
+
     return(
         <>
             <div className="voteControls" onClick={(e)=>e.stopPropagation()}>

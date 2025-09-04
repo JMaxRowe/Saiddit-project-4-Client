@@ -6,6 +6,12 @@ import { UserContext } from '../../contexts/UserContext';
 import { topLevelComments } from '../../utils/comments';
 import CommentTile from '../CommentTile/CommentTile';
 import VoteController from '../VoteController/VoteController';
+import { FaEdit } from "react-icons/fa";
+import { HiMiniArchiveBoxXMark } from "react-icons/hi2";
+import { MdOutlineInsertComment } from "react-icons/md";
+import CreateComment from '../CreateComment/CreateComment';
+
+
 
 export default function PostPage(){
     const { postId } = useParams()
@@ -54,51 +60,62 @@ export default function PostPage(){
     return(
         <main className='postPage'>
             <div className="postSection">
-                <div className="postInfo">
-                    <p>{post.community.name}</p>
-                <p>{post.poster.username}</p>
+                <div className="postHeader">
+                    <div className="postInfo">
+                        <p>{post.community.name}</p>
+                        <p>{post.poster.username}</p>
+                    </div>
+                    {(post.poster.id === user.id) && (
+                        <div className="ownerOptions">
+                        <button className='editPostButton' onClick={() => navigate(`/posts/${postId}/edit/`)}><FaEdit /></button>
+                        <button className='archivePostButton'><HiMiniArchiveBoxXMark /></button>
+                    </div>
+                    )}
+                    
+                </div>
+                
+                <div className="postBody">
+                    <h2>{post.title}</h2>
+                    {post.type === 'text' ? (
+                        <p>{post.body}</p>
+                    ) : post.type === 'image' ? (
+                        post.media_url ? (
+                        <img
+                            className="postMedia"
+                            src={post.media_url}
+                            alt={post.title}
+                        />
+                        ) : null
+                    ) : post.type === 'video' ? (
+                        post.media_url ? (
+                        <video
+                            className="postMedia"
+                            src={post.media_url}
+                            controls
+                            preload="metadata"
+                            playsInline
+                        >
+                        </video>
+                        ) : null
+                    ) : null}
                 </div>
 
-                
-                
-
-                    <div className="postBody">
-                        <h2>{post.title}</h2>
-
-                        {post.type === 'text' ? (
-                            <p>{post.body}</p>
-                        ) : post.type === 'image' ? (
-                            post.media_url ? (
-                            <img
-                                className="postMedia"
-                                src={post.media_url}
-                                alt={post.title}
-                            />
-                            ) : null
-                        ) : post.type === 'video' ? (
-                            post.media_url ? (
-                            <video
-                                className="postMedia"
-                                src={post.media_url}
-                                controls
-                                preload="metadata"
-                                playsInline
-                            >
-                            </video>
-                            ) : null
-                        ) : null}
+                <div className="postInteractions">
+                    <VoteController 
+                    contentTypeId={post.contentTypeId}
+                    objectId={post.id}
+                    score={post.score}
+                    userVote={post.user_vote ?? 0}
+                    />
+                    <div className="commentsButton" >
+                            <MdOutlineInsertComment /> {post.comments_count}
                     </div>
-
-                    <div className="postInteractions">
-                        <VoteController 
-                        contentTypeId={post.contentTypeId}
-                        objectId={post.id}
-                        score={post.score}
-                        userVote={post.user_vote ?? 0}
-                        />
-                    </div>
+                </div>
             </div>
             <div className="commentsSection">
+                <div className="postcomment">
+                    <CreateComment postId={postId} />
+                </div>
                 <h4>Comments:</h4>
                     {isLoading 
                     ? 'Loading...'

@@ -28,7 +28,7 @@ export default function Home(){
             <h1>Home</h1>
             <div className="postsGrid">
                 {isLoading 
-                ? 'Loading...'
+                ? 'Looking for posts...'
                 :
                 posts.length > 0 ? (
                     posts.map((post) => {

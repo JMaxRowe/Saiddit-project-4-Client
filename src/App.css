@@ -16,3 +16,12 @@ a{
 a:hover{
   color:rgb(177, 177, 177)
 }
+
+.error-message{
+  color: rgb(255, 0, 0);
+}
+
+img{
+  max-width: 500px;
+  border-radius: 12px;
+}

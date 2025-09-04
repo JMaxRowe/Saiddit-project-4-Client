@@ -69,6 +69,10 @@ export default function CreatePostPage(){
         : submitting
         ? 'submitting...'
         : 'Submit'
+    
+    if (isLoading) return <p>Loading…</p>
+    if (errors ) return <p>Post not found </p>
+    if (!post) return <p>Where's the post?</p>
 
     return(
         <form className="CreatePostForm" onSubmit={handleSubmit}>

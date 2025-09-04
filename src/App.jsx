@@ -12,6 +12,7 @@ import SignUpPage from './components/SignUpPage/SignUpPage'
 import SignInPage from './components/SignInPage/SignInPage'
 import CommunityPage from './components/CommunityPage/CommunityPage'
 import CreatePostPage from './components/CreatePostPage/CreatePostPage'
+import EditPostForm from './components/EditPost/EditPost'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         <Route path='/posts/:postId/' element={<PostPage />}></Route>
         <Route path='/communities/:communityId/' element={<CommunityPage />}></Route>
         <Route path='/posts/create/' element={<CreatePostPage />}></Route>
+        <Route path='/posts/:postId/edit/' element={<EditPostForm />}></Route>
       </Routes>
     </main>
   )

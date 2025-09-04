@@ -43,6 +43,7 @@ export default function Navbar(){
                 
                 {user ?(
                     <>
+                        <Link to='/profile/'>{user.username}'s profile</Link>
                         <Link to='/posts/create/'>Create a Post</Link>
                         <button
                         type="button"

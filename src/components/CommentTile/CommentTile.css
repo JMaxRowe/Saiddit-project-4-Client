@@ -9,3 +9,10 @@
 .userInfo{
     font-size: 0.75em;
 }
+
+.commentInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

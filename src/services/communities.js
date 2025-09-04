@@ -16,19 +16,19 @@ export const getCommunity = (id) => {
 };
 
 export const joinCommunity = (id) => {
-    return axios.post(BASE_URL + `${id}/join/`, {
+    return axios.post(BASE_URL + `${id}/join/`, {}, {
         headers: { Authorization: `Bearer ${getToken()}` },
     });
 };
 
 export const leaveCommunity = (id) => {
-    return axios.post(BASE_URL + `${id}/leave/`, {
+    return axios.post(BASE_URL + `${id}/leave/`, {}, {
         headers: { Authorization: `Bearer ${getToken()}` },
     });
 };
 
 export const restoreCommunity = (id) => {
-    return axios.post(BASE_URL + `${id}/restore/`, {
+    return axios.post(BASE_URL + `${id}/restore/`, {}, {
         headers: { Authorization: `Bearer ${getToken()}` },
     });
 };

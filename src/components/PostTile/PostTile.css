@@ -21,3 +21,31 @@ div.postCard:hover{
 .comments:hover{
     filter: brightness(0.75)
 }
+
+.communityInfo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toggleJoin {
+    border: none;
+
+    padding: 4px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.toggleJoin.join {
+  background: #0079d3;
+}
+
+.toggleJoin.leave {
+  background: #ff4500;
+}
+
+.toggleJoin:hover {
+  filter: brightness(0.75);
+}

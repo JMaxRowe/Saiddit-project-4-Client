@@ -3,6 +3,7 @@ import { postsIndex } from '../../utils/posts'
 import { useEffect, useState } from "react";
 import PostTile from '../PostTile/PostTile';
 
+
 export default function Home(){
     const [posts, setPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);

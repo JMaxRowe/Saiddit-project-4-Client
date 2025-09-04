@@ -1,27 +1,43 @@
 import "./ImageUploadField.css"
 import { uploadImage } from "../../services/cloudinary"
+import { useState } from "react"
 
-export default function ImageUploadField({image, setImage, imageUrl, setIsUploading, playlistImage, showPlaceholder = false}){
-    const placeholderImage = 'https://res.cloudinary.com/dhdhyhahn/image/upload/v1755012671/5b3d5b19-045d-486b-822e-e8bc5fe8c16c.png'
+export default function ImageUploadField({image, setImage, imageUrl, setIsUploading, type = false}){
+    const [error, setError] = useState('')
 
     const handleFileUpload = async (e) =>{
+        setError('')
         setIsUploading(true)
         try {
             const file = e.target.files[0]
+            if (type === 'video' && !file.type.startsWith('video/')) {
+                setError('You did not upload a video file.')
+                setIsUploading(false)
+                return
+            }
+
+            if (type === 'image' && !file.type.startsWith('image/')) {
+                setError('You did not upload an image file.')
+                setIsUploading(false)
+                return
+            }
             const {data} = await uploadImage(file)
             setImage(data.secure_url)
         } catch (error) {
-            console.log(error)
+            setError('Media file upload failed.')
         } finally {
             setIsUploading(false)
         }
     }
-        const displayImage = imageUrl || playlistImage || (showPlaceholder ? placeholderImage : null)
+
+    const displayImage = imageUrl
+
     return(
         <>
-        {displayImage && <img className={`uploaded${image}`} src={displayImage} />}
-        <label htmlFor={image}>Upload {image}</label>
+        {displayImage ? (
+        <img className={`uploaded ${image}`} src={displayImage} />) : null}
         <input type="file" name={image} id={image} onChange={handleFileUpload}/>
+        {error && <p className='error-message'>{error}</p>}
         </>
     )
 }

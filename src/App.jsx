@@ -11,6 +11,7 @@ import PostPage from './components/PostPage/PostPage'
 import SignUpPage from './components/SignUpPage/SignUpPage'
 import SignInPage from './components/SignInPage/SignInPage'
 import CommunityPage from './components/CommunityPage/CommunityPage'
+import CreatePostPage from './components/CreatePostPage/CreatePostPage'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path='/sign-in' element={<SignInPage />}></Route>
         <Route path='/posts/:postId/' element={<PostPage />}></Route>
         <Route path='/communities/:communityId/' element={<CommunityPage />}></Route>
+        <Route path='/posts/create/' element={<CreatePostPage />}></Route>
       </Routes>
     </main>
   )

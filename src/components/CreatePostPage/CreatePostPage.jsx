@@ -102,7 +102,7 @@ export default function CreatePostPage(){
                 </>
             ) : (
                 <>
-                <ImageUploadField image="media_url" setImage ={setMediaUrl} imageUrl={formData.media_url} setIsUploading={setIsUploading}/>
+                <ImageUploadField image="media_url" setImage ={setMediaUrl} imageUrl={formData.media_url} setIsUploading={setIsUploading} type={formData.type}/>
                 </>
             )}
             {errors.global && <p className='error-message'>{errors.global}</p>}

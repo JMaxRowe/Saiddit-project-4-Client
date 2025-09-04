@@ -9,6 +9,7 @@ import VoteController from '../VoteController/VoteController';
 import { FaEdit } from "react-icons/fa";
 import { HiMiniArchiveBoxXMark } from "react-icons/hi2";
 import { MdOutlineInsertComment } from "react-icons/md";
+import CreateComment from '../CreateComment/CreateComment';
 
 
 
@@ -113,7 +114,7 @@ export default function PostPage(){
             </div>
             <div className="commentsSection">
                 <div className="postcomment">
-                    
+                    <CreateComment postId={postId} />
                 </div>
                 <h4>Comments:</h4>
                     {isLoading 

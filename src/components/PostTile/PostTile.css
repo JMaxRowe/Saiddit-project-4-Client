@@ -13,3 +13,11 @@ div.postCard:hover{
     flex-direction: row;
     justify-content: space-around;
 }
+
+.comments{
+    background-color: transparent;
+    border: none;
+}
+.comments:hover{
+    filter: brightness(0.75)
+}

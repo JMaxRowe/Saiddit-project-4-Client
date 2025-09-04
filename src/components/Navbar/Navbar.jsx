@@ -18,7 +18,6 @@ export default function Navbar(){
             setIsLoading(true);
             try {
                 const { data } = await communitiesIndex();
-                console.log(data)
                 setCommunities(data);
             } catch (error) {
                 setErrors(error);

@@ -14,3 +14,21 @@ export const getCommunity = (id) => {
         headers: { Authorization: `Bearer ${getToken()}` },
     });
 };
+
+export const joinCommunity = (id) => {
+    return axios.post(BASE_URL + `${id}/join/`, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+    });
+};
+
+export const leaveCommunity = (id) => {
+    return axios.post(BASE_URL + `${id}/leave/`, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+    });
+};
+
+export const restoreCommunity = (id) => {
+    return axios.post(BASE_URL + `${id}/restore/`, {
+        headers: { Authorization: `Bearer ${getToken()}` },
+    });
+};

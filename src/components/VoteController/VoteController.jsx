@@ -62,7 +62,7 @@ export default function VoteController({
                 <FaArrowUp />
                 </button>
 
-                <span className="voteScore">{currentScore}</span>
+                <span className={`voteScore ${myVote === 1 ? "upvoted" : ""} ${myVote === -1 ? "downvoted" : ""}`}>{currentScore}</span>
 
                 <button
                 type="button"

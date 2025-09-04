@@ -1,3 +1,48 @@
-.active{
-    background-color: orange;
+.voteControls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgb(188, 188, 188)
+}
+
+.voteBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.voteBtn svg {
+    color: #888;
+    transition: color 0.2s ease;
+}
+.voteBtn:hover svg{
+    filter: brightness(0.75);
+}
+
+.voteBtn.up.active svg {
+    color: #ff3700;
+}
+
+.voteBtn.down.active svg {
+    color: #2c5dff;
+}
+
+.voteScore {
+    font-weight: bold;
+    font-size: 14px;
+    color: #606060;
+    min-width: 20px;
+    text-align: center;
+}
+
+.voteScore.upvoted {
+    color: #ff3700;
+}
+
+.voteScore.downvoted {
+    color: #2c5dff;
 }

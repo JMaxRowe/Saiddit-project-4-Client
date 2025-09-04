@@ -1,4 +1,4 @@
-import './Postpage.css'
+import './PostPage.css'
 import { useEffect, useState, useContext } from "react";
 import { getPost, deletePost } from '../../utils/posts';
 import { Link, useParams, useNavigate } from "react-router";
@@ -59,18 +59,44 @@ export default function PostPage(){
                 <p>{post.poster.username}</p>
                 </div>
 
-                <div className="postBody">
-                    <h2>{post.title}</h2>
-                    <p>{post.body}</p>
-                </div>
-                <div className="postInteractions">
-                    <VoteController 
-                    contentTypeId={post.contentTypeId}
-                    objectId={post.id}
-                    score={post.score}
-                    userVote={post.user_vote ?? 0}
-                    />
-                </div>
+                
+                
+
+                    <div className="postBody">
+                        <h2>{post.title}</h2>
+
+                        {post.type === 'text' ? (
+                            <p>{post.body}</p>
+                        ) : post.type === 'image' ? (
+                            post.media_url ? (
+                            <img
+                                className="postMedia"
+                                src={post.media_url}
+                                alt={post.title}
+                            />
+                            ) : null
+                        ) : post.type === 'video' ? (
+                            post.media_url ? (
+                            <video
+                                className="postMedia"
+                                src={post.media_url}
+                                controls
+                                preload="metadata"
+                                playsInline
+                            >
+                            </video>
+                            ) : null
+                        ) : null}
+                    </div>
+
+                    <div className="postInteractions">
+                        <VoteController 
+                        contentTypeId={post.contentTypeId}
+                        objectId={post.id}
+                        score={post.score}
+                        userVote={post.user_vote ?? 0}
+                        />
+                    </div>
             </div>
             <div className="commentsSection">
                 <h4>Comments:</h4>

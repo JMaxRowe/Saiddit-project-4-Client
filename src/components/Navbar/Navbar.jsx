@@ -40,8 +40,10 @@ export default function Navbar(){
             <div className="logo">Saiddit</div>
             <nav>
                 <Link to='/'>Home</Link>
+                
                 {user ?(
                     <>
+                        <Link to='/posts/create/'>Create a Post</Link>
                         <button
                         type="button"
                         className="signout-btn"

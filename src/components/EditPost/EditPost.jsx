@@ -110,6 +110,7 @@ export default function EditPostForm(){
                 
             </>
             )}
+            <button className='saveChanges' disabled={isUploading || submitting}type="submit">{buttonLabel}</button>
         </form>
     )
 }

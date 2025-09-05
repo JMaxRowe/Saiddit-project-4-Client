@@ -10,6 +10,7 @@ import { FaEdit } from "react-icons/fa";
 import { HiMiniArchiveBoxXMark } from "react-icons/hi2";
 import { MdOutlineInsertComment } from "react-icons/md";
 import CreateComment from '../CreateComment/CreateComment';
+import { getToken } from '../../utils/auth';
 
 
 
@@ -21,6 +22,7 @@ export default function PostPage(){
     const [error, setError] = useState(null)
     const { user } = useContext(UserContext)
     const navigate = useNavigate()
+    const is_signed_in = getToken()
 
     useEffect(() => {
         const getPostData = async () => {
@@ -53,6 +55,17 @@ export default function PostPage(){
             getCommentData()
     }, [postId])
 
+    const archivePost = async() => {
+        try {
+            console.log('deleting')
+            await deletePost(postId)
+            console.log('deleted')
+        } catch (error) {
+            console.log(error)
+            setError('failed to delete post')
+        }
+    }
+
     if (isLoading) return <p>Loading…</p>
     if (error) return <p>Post not found </p>
     if (!post) return <p>Where's the post?</p>
@@ -61,19 +74,26 @@ export default function PostPage(){
         <main className='postPage'>
             <div className="postSection">
                 <div className="postHeader">
+                    {post.is_deleted ? 
+                    <p>[Anonymous]</p>
+                    :
                     <div className="postInfo">
                         <p>{post.community.name}</p>
                         <p>{post.poster.username}</p>
                     </div>
-                    {(post.poster.id === user.id) && (
+                    }
+                    
+                    {is_signed_in && !post.is_deleted && (post.poster.id === user?.id) && (
                         <div className="ownerOptions">
                         <button className='editPostButton' onClick={() => navigate(`/posts/${postId}/edit/`)}><FaEdit /></button>
-                        <button className='archivePostButton'><HiMiniArchiveBoxXMark /></button>
+                        <button className='archivePostButton' onClick={archivePost}><HiMiniArchiveBoxXMark /></button>
                     </div>
                     )}
                     
                 </div>
-                
+                {post.is_deleted ? 
+                <h2>[Deleted Post]</h2>
+                :
                 <div className="postBody">
                     <h2>{post.title}</h2>
                     {post.type === 'text' ? (
@@ -99,6 +119,7 @@ export default function PostPage(){
                         ) : null
                     ) : null}
                 </div>
+                }           
 
                 <div className="postInteractions">
                     <VoteController 
@@ -113,9 +134,10 @@ export default function PostPage(){
                 </div>
             </div>
             <div className="commentsSection">
-                <div className="postcomment">
+                {is_signed_in &&<div className="postcomment">
                     <CreateComment postId={postId} />
-                </div>
+                </div>}
+                
                 <h4>Comments:</h4>
                     {isLoading 
                     ? 'Loading...'

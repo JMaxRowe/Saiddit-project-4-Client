@@ -27,6 +27,7 @@ function App() {
         <Route path='/communities/:communityId/' element={<CommunityPage />}></Route>
         <Route path='/posts/create/' element={<CreatePostPage />}></Route>
         <Route path='/posts/:postId/edit/' element={<EditPostForm />}></Route>
+        <Route path='/profile/' element={<ProfilePage />}></Route>
       </Routes>
     </main>
   )

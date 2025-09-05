@@ -14,9 +14,11 @@ export default function Navbar(){
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-            const getCommunitiesData = async () => {
+        const getCommunitiesData = async () => {
             setIsLoading(true);
+            
             try {
+                console.log('hello')
                 const { data } = await communitiesIndex();
                 setCommunities(data);
             } catch (error) {
@@ -26,13 +28,15 @@ export default function Navbar(){
             }
             };
             getCommunitiesData();
-        }, []);
+        }, [user]);
 
     const handleSignOut = () => {
         navigate("/");
         removeToken();
         setUser(null);
     };
+
+    const myCommunities = communities.filter(c => c.is_member === true)
 
     return(
         <header>
@@ -51,6 +55,25 @@ export default function Navbar(){
                         >
                             Sign Out
                         </button>
+                        <h4>Joined Communities:</h4>
+                        <div className="communitiesGrid">
+                            {isLoading 
+                            ? 'Searching for communities...'
+                            :
+                            myCommunities.length > 0 ? (
+                            myCommunities.map((community) => {
+                                return (
+                                <div key={community.id} className="communityTile">
+                                    <Link to={`/communities/${community.id}/`} >{community.name}</Link>
+                                </div>
+                                );
+                            })
+                            ) : (
+                            <p>You haven't joined any communities :(</p>
+                            )
+                            }
+
+                        </div>
                         <h4>Communities:</h4>
                         <div className="communitiesGrid">
                             {isLoading 

@@ -24,6 +24,16 @@ export default function Home(){
         getPostData();
     }, []);
 
+    const handleCommunityUpdate = (updatedCommunity) => {
+        setPosts(prevPosts =>
+            prevPosts.map(p =>
+                p?.community?.id === updatedCommunity?.id
+                    ? { ...p, community: updatedCommunity }
+                    : p
+            )
+        );
+    };
+
     return(
         <main className='homePage'>
             <h1>Home</h1>
@@ -35,7 +45,7 @@ export default function Home(){
                     posts.map((post) => {
                         return (
                         <div key={post.id} className="postTile">
-                            <PostTile post={post}/>
+                            <PostTile post={post} onCommunityUpdate={handleCommunityUpdate}/>
                         </div>
                         );
                     })

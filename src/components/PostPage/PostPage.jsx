@@ -55,6 +55,12 @@ export default function PostPage(){
             getCommentData()
     }, [postId])
 
+    const handleCommentUpdated = (updated) => {
+        setComments(prev =>
+            prev.map(c => c.id === updated.id ? { ...c, ...updated } : c)
+        )
+}
+
     const archivePost = async() => {
         try {
             console.log('deleting')
@@ -146,7 +152,7 @@ export default function PostPage(){
                         comments.map((comment) => {
                             return (
                             <div key={comment.id} className="commentTile">
-                                <CommentTile comment={comment} />
+                                <CommentTile comment={comment} onUpdate={handleCommentUpdated}/>
                             </div>
                             );
                         })

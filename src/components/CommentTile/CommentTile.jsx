@@ -6,25 +6,28 @@ import { useState, useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { getToken } from "../../utils/auth";
 
-export default function CommentTile ({comment}){
+export default function CommentTile ({comment, onUpdate}){
     const [error, setError] = useState(null)
     const {user} = useContext(UserContext)
     const [isDeleted, setIsDeleted] = useState(comment.is_deleted)
     const is_signed_in = getToken()
+    const [isLoading, setIsLoading] = useState(false)
 
-    const toggleRemoveComment = async() => {
-
-
-        
-
+    const toggleRemoveComment = async () => {
+        setError(null)
+        setIsLoading(true)
         try {
-            if(isDeleted){
-                await deleteComment(comment.id)
-            } else {
-                await restoreComment(comment.id)
-            }
-        } catch (error) {
-            setError(error)
+        const { data: updated } = isDeleted
+            ? await restoreComment(comment.id)
+            : await deleteComment(comment.id)
+
+        setIsDeleted(updated.is_deleted)
+
+        onUpdate?.(updated)
+        } catch (err) {
+        setError('Failed to update comment')
+        } finally {
+        setIsLoading(false)
         }
     }
 

@@ -11,38 +11,37 @@ import { joinCommunity } from '../../services/communities';
 import { leaveCommunity } from '../../services/communities';
 
 
-export default function PostTile ({post}){
+export default function PostTile ({post, onCommunityUpdate}){
     const navigate = useNavigate()
     const {user} = useContext(UserContext)
-    const [isMember, setIsMember] = useState(false)
-    const [error, setError] = useState({})
+    const [error, setError] = useState(null)
     const is_signed_in = getToken()
 
-    useEffect(() => {
-    if (user === post.community.members) {
-        setIsMember(post.community.members.includes(user.id))
-    }
-}, [user, post])
+    const userId = user?.id
+    const isMember =
+        post.community?.is_member ??
+        (!!userId && members.some(m => (typeof m === 'number' ? m === userId : m?.id === userId)))
+
+    
+    
+
 
     const handleToggle = async (e) => {
-    e.stopPropagation()
-    setError({})
-    if (!user) {
-        return navigate("/sign-in/")
-    }
+        e.stopPropagation()
+        setError(null)
+        if (!user) return navigate("/sign-in/")
+        if (!post.community?.id) return
 
-    try {
-        if (isMember) {
-            await leaveCommunity(post.community.id)
-            setIsMember(false)
-        } else {
-            await joinCommunity(post.community.id)
-            setIsMember(true)
+        try {
+            const { data: updatedCommunity } = isMember
+            ? await leaveCommunity(post.community.id)
+            : await joinCommunity(post.community.id)
+
+            onCommunityUpdate?.(updatedCommunity)
+        } catch (err) {
+            setError("Failed to toggle membership")
         }
-    } catch (err) {
-        setError("Failed to toggle membership:")
     }
-}
 
 
 

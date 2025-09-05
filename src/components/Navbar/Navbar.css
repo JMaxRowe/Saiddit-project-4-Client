@@ -27,3 +27,12 @@ nav{
     font-size: 50px;
     color: rgb(255, 72, 0)
 }
+
+.logoName{
+    font-size: 30px;
+}
+.logoSection{
+    display:flex;
+    flex-direction: column;
+    gap: 5px;
+}

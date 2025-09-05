@@ -6,6 +6,8 @@ import { removeToken } from '../../utils/auth';
 import { useNavigate } from 'react-router';
 import { communitiesIndex } from '../../services/communities';
 import { LiaRobotSolid } from "react-icons/lia";
+import { GiButterToast } from "react-icons/gi";
+
 
 
 export default function Navbar(){
@@ -42,7 +44,10 @@ export default function Navbar(){
 
     return(
         <header>
-            <div className="logo"><LiaRobotSolid /></div>
+            <div className="logoSection">
+                <div className="logo"><GiButterToast /></div>
+                <div className='logoName'>Spreaddit</div>
+            </div>
             <nav>
                 <Link to='/'>Home</Link>
                 

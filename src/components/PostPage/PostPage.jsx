@@ -10,6 +10,7 @@ import { FaEdit } from "react-icons/fa";
 import { HiMiniArchiveBoxXMark } from "react-icons/hi2";
 import { MdOutlineInsertComment } from "react-icons/md";
 import CreateComment from '../CreateComment/CreateComment';
+import { getToken } from '../../utils/auth';
 
 
 
@@ -21,6 +22,7 @@ export default function PostPage(){
     const [error, setError] = useState(null)
     const { user } = useContext(UserContext)
     const navigate = useNavigate()
+    const is_signed_in = getToken()
 
     useEffect(() => {
         const getPostData = async () => {
@@ -81,7 +83,7 @@ export default function PostPage(){
                     </div>
                     }
                     
-                    {!post.is_deleted && (post.poster.id === user.id) && (
+                    {is_signed_in && !post.is_deleted && (post.poster.id === user?.id) && (
                         <div className="ownerOptions">
                         <button className='editPostButton' onClick={() => navigate(`/posts/${postId}/edit/`)}><FaEdit /></button>
                         <button className='archivePostButton' onClick={archivePost}><HiMiniArchiveBoxXMark /></button>
@@ -132,9 +134,10 @@ export default function PostPage(){
                 </div>
             </div>
             <div className="commentsSection">
-                <div className="postcomment">
+                {is_signed_in &&<div className="postcomment">
                     <CreateComment postId={postId} />
-                </div>
+                </div>}
+                
                 <h4>Comments:</h4>
                     {isLoading 
                     ? 'Loading...'

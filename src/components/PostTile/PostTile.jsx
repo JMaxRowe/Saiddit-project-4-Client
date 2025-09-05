@@ -16,6 +16,7 @@ export default function PostTile ({post}){
     const {user} = useContext(UserContext)
     const [isMember, setIsMember] = useState(false)
     const [error, setError] = useState({})
+    const is_signed_in = getToken()
 
     useEffect(() => {
     if (user === post.community.members) {
@@ -57,6 +58,7 @@ export default function PostTile ({post}){
                     <p>{post.community.name}</p>
                     <p>{post.poster.username}</p>
                 </div>
+                {is_signed_in && 
                 <div className="communityActions">
                     <button 
                         className={`toggleJoin ${isMember ? "leave" : "join"}`} 
@@ -65,6 +67,7 @@ export default function PostTile ({post}){
                         {isMember ? "Leave" : "Join"}
                     </button>
                 </div>
+                }
                 </>
                 
                 }

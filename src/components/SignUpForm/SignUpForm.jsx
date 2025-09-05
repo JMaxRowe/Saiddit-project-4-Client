@@ -47,9 +47,7 @@ export default function SignUpForm(){
     return(
         <form className="form" onSubmit={handleSubmit}>
             <h1> Create an Account</h1>
-
-            <ImageUploadField image="ProfileImage" setImage ={setProfileImage} imageUrl={formData.profileImage} setIsUploading={setIsUploading}/>
-
+            
             <label htmlFor="email">Email</label>
             <input type="email" name='email' id='email' placeholder='user@example.co.uk' value={formData.email} onChange={handleChange}/>
             {errors.email && <p className='errorMessage'>{errors.email}</p>}

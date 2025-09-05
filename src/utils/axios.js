@@ -1,0 +1,15 @@
+import axios from 'axios'
+import { getToken } from "./auth"
+
+const instance = axios.create()
+
+instance.interceptors.request.use(function(config){
+    const token = getToken()
+
+    if(token) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+})
+
+export default instance

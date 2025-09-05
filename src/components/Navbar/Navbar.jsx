@@ -5,6 +5,8 @@ import { UserContext } from "../../contexts/UserContext";
 import { removeToken } from '../../utils/auth';
 import { useNavigate } from 'react-router';
 import { communitiesIndex } from '../../services/communities';
+import { LiaRobotSolid } from "react-icons/lia";
+
 
 export default function Navbar(){
     const { user, setUser } = useContext(UserContext);
@@ -40,7 +42,7 @@ export default function Navbar(){
 
     return(
         <header>
-            <div className="logo">Saiddit</div>
+            <div className="logo"><LiaRobotSolid /></div>
             <nav>
                 <Link to='/'>Home</Link>
                 

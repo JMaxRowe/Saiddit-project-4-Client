@@ -22,3 +22,8 @@ nav{
     flex-direction: column;
     
     }
+
+.logo{
+    font-size: 50px;
+    color: rgb(255, 72, 0)
+}

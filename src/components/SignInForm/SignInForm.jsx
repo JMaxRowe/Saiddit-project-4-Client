@@ -12,12 +12,12 @@ export default function SignInForm(){
         username: '',
         password: '',
     })
-    const [errors, setErrors] = useState({})
+    const [error, setError] = useState(null)
 
     const navigate = useNavigate()
 
     const handleSubmit = async(e) => {
-        setErrors({})
+        setError(null)
         e.preventDefault()
         try {
             const {data} = await signIn(formData)
@@ -26,7 +26,7 @@ export default function SignInForm(){
             navigate("/")
         } catch (error) {
             console.log(error)
-            setErrors(error.response.data)
+            setError(error.response.data)
         }
     }
 
@@ -44,7 +44,7 @@ export default function SignInForm(){
             <label htmlFor="password">Password</label>
             <input type="password" name='password' id='password' placeholder='********' value={formData.password} onChange={handleChange}/>
 
-            {errors.message && <p className='error-message'>Please ensure your username/email and password are correct</p>}
+            {error && <p className='error-message'>Please ensure your username/email and password are correct</p>}
             <button type="submit">Sign-In</button> 
             <Link to={"/sign-up/"}>Don't have an account?</Link>
         </form>

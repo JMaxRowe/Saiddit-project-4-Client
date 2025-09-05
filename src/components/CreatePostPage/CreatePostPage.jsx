@@ -43,7 +43,9 @@ export default function CreatePostPage(){
         setSubmitting(true)
         try {
             const {data} = await createPost(formData)
-            navigate(`/posts/${data.id}`)
+            console.log("Post created:", data)
+
+            navigate(`/posts/${data.id}/`)
         } catch (error) {
             console.log(error)
             setErrors(error.response.data)
